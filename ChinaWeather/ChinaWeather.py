@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding:utf-8
 
-import urllib
+import urllib.request, urllib.parse, urllib.error
 from bs4 import BeautifulSoup
 import re
 import json
@@ -27,11 +27,11 @@ def cache(func):
 def _get_weather_data(city):
     '''get weather data per hour for every city
     '''
-    html_doc = urllib.urlopen(city).read()
+    html_doc = urllib.request.urlopen(city).read()
     soup = BeautifulSoup(html_doc)
     alldata = {}
     for i in soup.find_all('div')[2:10]:
-        tempdata = i.string.replace('\t', '').replace('\r\n', ' ').split(u'：')
+        tempdata = i.string.replace('\t', '').replace('\r\n', ' ').split('：')
         alldata[tempdata[0].strip()] = tempdata[1]
     return alldata
 

@@ -1,3 +1,3 @@
 __all__ = ['get']
 
-from ChinaWeather import get
+from .ChinaWeather import get
